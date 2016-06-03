@@ -1,4 +1,4 @@
-import sqlite3, os
+import os
 
 
 def general_memy():

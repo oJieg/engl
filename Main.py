@@ -12,6 +12,7 @@ def menMain():
         # outBD()
     elif repty == 'test':
         TestWord.HelloTestMeny("eng")
+        menMain()
     # elif repty == "exit":
 
     elif repty == "new bd":

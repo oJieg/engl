@@ -44,6 +44,7 @@ def testMenu(sizetest, Ru_):
     con.commit()
 
 
+
 def rendPoint(answer, word, sizea, question):
     word_list=[]
     tryanswer = random.randint(0, 4)
