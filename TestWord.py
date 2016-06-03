@@ -1,4 +1,4 @@
-import sqlite3, os, random, Interface
+import sqlite3, random, Interface
 
 con = sqlite3.connect("MaimBD.db")
 cur = con.cursor()
@@ -16,42 +16,41 @@ def HelloTestMeny(Ru_):
 
 
 def testMenu(sizetest, Ru_):
-    a = []
+
     cur.execute("select ID, EngWord, RuWord, coif from Glassary Order by coif")
-    a = cur.fetchmany(sizetest)  # составляем список задействованых слов
-    # print(a)
+    all_world_list = cur.fetchmany(sizetest)  # составляем список задействованых слов
+
     cur.execute("select ID from Glassary Order by ID Desc")
     sizea = cur.fetchmany(1)
     sizea = sizea[0][0]
-    #print(sizea)
+
 
     for i in range(sizetest):
-        os.system("cls")
+
         if Ru_ == "ru":  # !!!!!!!!!!!! если ру то русское слово в вариантах
-            print(a[i][1], "ad;flkjasf")
-            if rendPoint(a[i][2], "RuWord", sizea) == 1:
-                cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": a[i][3] + winCoef, "id": a[i][0]})
+            if rendPoint(all_world_list[i][2], "RuWord", sizea,all_world_list[i][1]) == 1:
+                cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": all_world_list[i][3] + winCoef, "id": all_world_list[i][0]})
             else:
-                print(a[i][3] + loserCoef)
-                cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": a[i][3] + loserCoef, "id": a[i][0]})
+                print(all_world_list[i][3] + loserCoef)
+                cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": all_world_list[i][3] + loserCoef, "id": all_world_list[i][0]})
 
 
         elif Ru_ == "eng":
-            print(a[i][2])
-            if rendPoint(a[i][1], "EngWord", sizea) == 1:
-                cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": a[i][3] + winCoef, "id": a[i][0]})
+            if rendPoint(all_world_list[i][1], "EngWord", sizea, all_world_list[i][2]) == 1:
+                cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": all_world_list[i][3] + winCoef, "id": all_world_list[i][0]})
             else:
                 cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id",
-                            {"coi": a[i][3] + loserCoef, "id": a[i][0]})
+                            {"coi": all_world_list[i][3] + loserCoef, "id": all_world_list[i][0]})
     con.commit()
 
 
-def rendPoint(answer, word, sizea):
+def rendPoint(answer, word, sizea, question):
+    word_list=[]
     tryanswer = random.randint(0, 4)
     for i in range(0, 5):
 
         if tryanswer == i:
-            print(i, answer, "+")
+            word_list.append(answer)
         else:
             ex = 0
             while ex == 0:
@@ -62,13 +61,6 @@ def rendPoint(answer, word, sizea):
                 z = cur.fetchall()
                 if z[0][0] != answer:
                     break
-            print(i, z[0][0])
+            word_list.append(z[0][0])
+    return Interface.test_test(word_list, tryanswer, question)
 
-    print(tryanswer)
-    inp = int(input("??"))
-    if inp == tryanswer:
-        print("win")
-        return 1
-    else:
-        print("luz")
-        return 0

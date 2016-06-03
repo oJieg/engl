@@ -77,6 +77,24 @@ def test_meny():
         elif inp == "4":
             return "exit"
 
+def test_test(word_list, tryanswer, question):
+
+    os.system("cls")
+    print(question)
+  #  print(word_list)
+    for x in range(1, len(word_list)):
+        print(x, word_list[x])
+    inp = int(input("??"))
+    if inp == tryanswer:
+
+        print("win")
+        input("pess any key")
+        return 1
+    else:
+
+        print("luz")
+        input("pess any key")
+        return 0
 
 
 
