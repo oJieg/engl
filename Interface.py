@@ -57,6 +57,25 @@ def add_meny():
         if input("0 - exit") == "0":
             return listA
 
+def test_meny():
+    ex = 0  # кол-во вопросов
+    while ex == 0:
+        os.system("cls")
+        print("hello")
+        print("elect size")
+        print("1- size small")
+        print("2- size mediym ")
+        print("3 size big")
+        print("4 - exit")
+        inp = input("input command:  ")
+        if inp == '1':
+           return 3
+        elif inp == "2":
+           return 5
+        elif inp == "3":
+            return 20
+        elif inp == "4":
+            return "exit"
 
 
 

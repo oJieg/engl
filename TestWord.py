@@ -1,4 +1,4 @@
-import sqlite3, os, random
+import sqlite3, os, random, Interface
 
 con = sqlite3.connect("MaimBD.db")
 cur = con.cursor()
@@ -9,24 +9,8 @@ loserCoef = 1
 
 
 def HelloTestMeny(Ru_):
-    sizetest = 0  # кол-во вопросов
-    while sizetest == 0:
-        os.system("cls")
-        print("hello")
-        print("elect size")
-        print("1- size small")
-        print("2- size mediym ")
-        print("3 size big")
-        print("4 - exit")
-        inp = input("input command:  ")
-        if inp == '1':
-            sizetest = 3
-        elif inp == "2":
-            sizetest = 5
-        elif inp == "3":
-            sizetest = 50
-        elif inp == "4":
-            break
+
+    sizetest = Interface.test_meny()
     if sizetest != 0:
         testMenu(sizetest, Ru_)
 
