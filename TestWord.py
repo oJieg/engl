@@ -23,7 +23,7 @@ def testMenu(sizetest, Ru_):
     cur.execute("select ID from Glassary Order by ID Desc")
     sizea = cur.fetchmany(1)
     sizea = sizea[0][0]
-    print(sizea)
+    #print(sizea)
 
     for i in range(sizetest):
         os.system("cls")

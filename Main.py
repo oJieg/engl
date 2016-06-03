@@ -18,7 +18,8 @@ def menMain():
         con = sqlite3.connect("MaimBD.db")
         cur = con.cursor()
         cur.execute(
-            "create table Glassary (ID integer primary key, EngWord, RuWord, coif DEFAULT 10, dataRepeat, Enable BLOB)")  # __________________________________________________________________________#
+            "create table Glassary (ID integer primary key, EngWord, RuWord, coif DEFAULT 10, dataRepeat, Enable BLOB)")
+# __________________________________________________________________________#
 # __________________________________________________________________________#
 # __________________________________________________________________________#
 
