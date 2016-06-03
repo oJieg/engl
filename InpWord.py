@@ -1,44 +1,35 @@
-import sqlite3, os
+import sqlite3, Interface
 
 con = sqlite3.connect("MaimBD.db")
 cur = con.cursor()
 
 
 def editMeny():
-    ex = 0
-    while ex == 0:
-        os.system("cls")
-        print("hello")
-        outBD()
-        print("______________")
-        print(" 1 - add word")
-        print(" 2 - exit")
-        print(" 3 - del")
-        print("______________")
-        inp = input("input command:  ")
-        if inp == '1':
-            add()
-        elif inp == '2':
-            break
-        elif inp == "3":
-            delword()
+
+    repty = Interface.inpyt_meny(outBD())
+
+    if repty == 'add':
+        add()
+    elif repty == 'exit':
+        return 0
+    #elif repty == "del":
+        #delword()
 
 
 def add():
-    inp = input("eng:  ")
-    inp2 = input("ru: ")
-    cur.execute("insert into Glassary (EngWord, RuWord) values ( ? , ?)", (inp, inp2))
+    listA = Interface.add_meny()
+    for x in range(0, len(listA[0])):
+        cur.execute("insert into Glassary (EngWord, RuWord) values ( ? , ?)", (listA[0][x], listA[1][x]))
     con.commit()
-    #cur.close()
+    # cur.close()
 
 
-def delword():
-    inp = input("inpyt id delite: ")
-    cur.execute("delete from Glassary where ID =:id ", {"id": inp})
-    con.commit()
+#def delword():
+  # inp = input("inpyt id delite: ")
+  # cur.execute("delete from Glassary where ID =:id ", {"id": inp})
+  #  con.commit()
 
 
 def outBD():
     cur.execute("select ID, EngWord, RuWord, coif from Glassary")
-    for n, i, k, w in cur.fetchall():
-        print(n, i, k, w)
+    return cur.fetchall()

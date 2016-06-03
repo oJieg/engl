@@ -1,41 +1,64 @@
-import sqlite3
-import InpWord, Interface, TestWord
-#class io_us:
+import sqlite3, os
 
-gl = 0
 
-def menMain():
-    print("hello")
-    print("1-add word")
-    print("2-out word")
-    print("3- exet")
-    print("0-create table")
-
+def general_memy():
     ex = 0
     while ex == 0:
+        os.system("cls")
+        print("hello")
+        print("1-edit word")
+        print("2-test")
+        print("0- exet")
+        print("3-create table")
         inp = input("input command:  ")
         if inp == '1':
-            InpWord.add()
+            return "edit"
         elif inp == '2':
-            outBD()
+            return "test"
         elif inp == "3":
-            ex = 1
-            break
+            return "new bd"
         elif inp == "0":
-            con = sqlite3.connect("MaimBD.db")
-            cur = con.cursor()
-            cur.execute("create table Glassary (ID integer primary key, EngWord, RuWord, coif, dataRepeat, Enable BLOB)")
+            return "exit"
 
 
 
 
+def inpyt_meny(BD):
+    # print(BD)
+    ex = 0
+    while ex == 0:
+        os.system("cls")
+        print("hello")
+        for n, i, k, w in BD:
+            print(n, i, k, w)
+        print("______________")
+        print(" 1 - add word")
+        print(" 0 - exit")
+        print(" 3 - del")
+        print("______________")
+        inp = input("input command:  ")
+        if inp == '1':
+            return "add"
+        elif inp == '0':
+            return "exit"
+        elif inp == "3":
+            return "del"
 
-def outBD():
-    con = sqlite3.connect("MaimBD.db")
-    cur = con.cursor()
-    cur.execute("select ID, EngWord, RuWord, coif, dataRepeat, Enable from Glassary")
-    for n, i, k, z, x, c in cur.fetchall():
-        print(n, i, k, z, x, c)
+def add_meny():
+
+    listA = [[], []]
+    ex = 0
+    while ex == 0:
+        inp = input("eng:  ")
+        inp2 = input("ru: ")
+        listA[0].append(inp)
+        listA[1].append(inp2)
+
+        if input("0 - exit") == "0":
+            return listA
+
+
+
 
 
 
