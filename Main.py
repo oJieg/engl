@@ -11,7 +11,7 @@ def menMain():
         # elif inp == '2':
         # outBD()
     elif repty == 'test':
-        TestWord.HelloTestMeny("eng")
+        TestWord.HelloTestMeny("ru")
         menMain()
     # elif repty == "exit":
 

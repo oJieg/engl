@@ -28,7 +28,7 @@ def testMenu(sizetest, Ru_):
     for i in range(sizetest):
 
         if Ru_ == "ru":  # !!!!!!!!!!!! если ру то русское слово в вариантах
-            if rendPoint(all_world_list[i][2], "RuWord", sizea,all_world_list[i][1]) == 1:
+            if rendPoint(all_world_list[i][2], "RuWord", sizea,all_world_list[i][1], i) == 1:
                 cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": all_world_list[i][3] + winCoef, "id": all_world_list[i][0]})
             else:
                 print(all_world_list[i][3] + loserCoef)
@@ -36,7 +36,7 @@ def testMenu(sizetest, Ru_):
 
 
         elif Ru_ == "eng":
-            if rendPoint(all_world_list[i][1], "EngWord", sizea, all_world_list[i][2]) == 1:
+            if rendPoint(all_world_list[i][1], "EngWord", sizea, all_world_list[i][2], i) == 1:
                 cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": all_world_list[i][3] + winCoef, "id": all_world_list[i][0]})
             else:
                 cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id",
@@ -45,8 +45,8 @@ def testMenu(sizetest, Ru_):
 
 
 
-def rendPoint(answer, word, sizea, question):
-    word_list=[]
+def rendPoint(answer, word, sizea, question, i):
+    word_list = []
     tryanswer = random.randint(0, 4)
     for i in range(0, 5):
 
@@ -63,5 +63,5 @@ def rendPoint(answer, word, sizea, question):
                 if z[0][0] != answer:
                     break
             word_list.append(z[0][0])
-    return Interface.test_test(word_list, tryanswer, question)
+    return Interface.test_test(word_list, tryanswer, question, i)
 
