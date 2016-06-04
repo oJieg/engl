@@ -85,9 +85,9 @@ def test_test(word_list, question, n, nMax):
   #  print(word_list)
     for x in range(1, len(word_list)):
         print(x, word_list[x])
-    inp = int(input("??"))
+    inp = input("??")
 
-    if inp == word_list[0]+1:
+    if inp == str(word_list[0]+1):
 
         print("win")
         input("pess any key")
@@ -95,10 +95,9 @@ def test_test(word_list, question, n, nMax):
     else:
 
         print("luz")
+        print(word_list[word_list[0]+1])
         input("pess any key")
         return 0
-
-
 
 
 
