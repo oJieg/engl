@@ -66,28 +66,28 @@ def test_meny():
         print("1- size small")
         print("2- size mediym ")
         print("3 size big")
-        print("4 - exit")
+        print("0 - exit")
         inp = input("input command:  ")
         if inp == '1':
-           return 3
+           return "small"
         elif inp == "2":
-           return 5
+           return "mediym"
         elif inp == "3":
-            return 20
-        elif inp == "4":
+            return "big"
+        elif inp == "0":
             return "exit"
 
-def test_test(word_list, tryanswer, question, i):
+def test_test(word_list, question, n, nMax):
 
     os.system("cls")
-    print("№", i)
+    print("№", n+1, "/", nMax)
     print(question)
   #  print(word_list)
-    for x in range(0, len(word_list)):
+    for x in range(1, len(word_list)):
         print(x, word_list[x])
     inp = int(input("??"))
 
-    if inp == tryanswer:
+    if inp == word_list[0]+1:
 
         print("win")
         input("pess any key")

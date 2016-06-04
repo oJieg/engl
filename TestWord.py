@@ -7,10 +7,26 @@ listotv = [[], []]
 winCoef = -1
 loserCoef = 1
 
+size_small = 3
+size_mediym = 10
+size_big = 20
+
 
 def HelloTestMeny(Ru_):
 
-    sizetest = Interface.test_meny()
+    otv = Interface.test_meny()
+    if  otv == "small":
+        sizetest = size_small
+    elif otv == "mediym":
+        sizetest = size_mediym
+    elif otv == "big":
+        sizetest = size_big
+
+    cur.execute("select ID from Glassary Order by ID Desc")
+    sizea = cur.fetchmany(1)
+    if sizetest > sizea[0][0]:
+        sizetest = sizea[0][0]
+
     if sizetest != 0:
         testMenu(sizetest, Ru_)
 
@@ -28,7 +44,8 @@ def testMenu(sizetest, Ru_):
     for i in range(sizetest):
 
         if Ru_ == "ru":  # !!!!!!!!!!!! если ру то русское слово в вариантах
-            if rendPoint(all_world_list[i][2], "RuWord", sizea,all_world_list[i][1], i) == 1:
+            otv = rendPoint(all_world_list[i][2], "RuWord", sizea)
+            if Interface.test_test(otv, all_world_list[i][1], i, sizetest) == 1:
                 cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": all_world_list[i][3] + winCoef, "id": all_world_list[i][0]})
             else:
                 print(all_world_list[i][3] + loserCoef)
@@ -36,7 +53,8 @@ def testMenu(sizetest, Ru_):
 
 
         elif Ru_ == "eng":
-            if rendPoint(all_world_list[i][1], "EngWord", sizea, all_world_list[i][2], i) == 1:
+            otv = rendPoint(all_world_list[i][1], "RuWord", sizea)
+            if Interface.test_test(otv, all_world_list[i][2], i, sizetest) == 1:
                 cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id", {"coi": all_world_list[i][3] + winCoef, "id": all_world_list[i][0]})
             else:
                 cur.execute("UPDATE Glassary SET coif=:coi WHERE Id=:id",
@@ -45,9 +63,10 @@ def testMenu(sizetest, Ru_):
 
 
 
-def rendPoint(answer, word, sizea, question, i):
+def rendPoint(answer, word, sizea):
     word_list = []
     tryanswer = random.randint(0, 4)
+    word_list.append(tryanswer)
     for i in range(0, 5):
 
         if tryanswer == i:
@@ -63,5 +82,6 @@ def rendPoint(answer, word, sizea, question, i):
                 if z[0][0] != answer:
                     break
             word_list.append(z[0][0])
-    return Interface.test_test(word_list, tryanswer, question, i)
+    return word_list
+        #Interface.test_test(word_list, tryanswer)
 
