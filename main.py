@@ -48,6 +48,10 @@ def cycle():
         cur.execute("insert into glassary (name, data, V_and_U) values ( ? , ?, ?)", (i, now, "U"))
         print(i, now, "U")  # print(Pars_url.nameV, Pars_url.nameU)
 
+    for i in Pars_url.nameU:
+        cur.execute("insert into glassary (name, data, V_and_U) values ( ? , ?, ?)", (i, now, "U"))
+        print(i, now, "A")  # print(Pars_url.nameV, Pars_url.nameU)
+
 def print_bd():
     cur.execute("select name, data, V_and_U from glassary")
     for n, d, vu in cur.fetchall():

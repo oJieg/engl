@@ -3,6 +3,7 @@ import urllib.request
 
 nameV = []  # с именами  groupVerif
 nameU = [] # groupUser
+nameA = [] # groupAdmin
 
 
 
@@ -13,6 +14,7 @@ def next_searth(root_url):
     nameU.clear()
     _pars_htl(htl, "groupVerif")
     _pars_htl(htl, "groupUser")
+    _pars_htl(htl, "groupAdmin")
 
 
 
@@ -23,10 +25,7 @@ def _pars_htl(htl, group):
     s = htl.find(group)
     htl = htl[s + 20: len(htl)]
     if s != -1:
-        if group == "groupVerif":
-            _searth_name(htl, group)
-        else:
-            _searth_name(htl, group)
+        _searth_name(htl, group)
         _pars_htl(htl, group)
 
 
@@ -37,8 +36,10 @@ def _searth_name(htl, group):
     htlex = htlex[s+1:len(htl)]
     if group == "groupVerif":
         nameV.append(htlex)
-    else:
+    elif group == "groupUser":
         nameU.append(htlex)
+    elif group == "groupAdmin":
+        nameA.append(htlex)
 
 
 
